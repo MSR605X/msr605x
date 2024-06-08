@@ -6,7 +6,7 @@ This is an in progress library for the MSR605X magstripe reader/writer.  The MSR
 # Protocol Details
 
 The MSR605X uses 64 byte USB HID packets to encapsulate what appears to be the MSR605's serial protocol.  
-The MSR605's serial protocol is documented in section 6 of the [MSR605 Programmer's Manual](https://usermanual.wiki/Pdf/MSR60520Programmers20Manual.325315846/help).
+The MSR605's serial protocol is documented in section 6 of the [MSR605 Programmer's Manual](https://msr605x.com).
 
 Messages to be sent over USB are split into chunks with a maximum size of 63 bytes. A 64 byte USB HID packet is then constructed from a 1 byte header, a chunk of the message, and sometimes some extra bytes to make the packet exactly 64 bytes regardless of the size of the chunk. The 1 byte header is made up of a single bit indicating if this packet is the first in the sequence of packets encapsulating a particular message, another single bit that indicates if this is the last packet in a sequence, and a 6 bit unsigned integer representing the length of the payload in the current packet.  For example, a header byte of 0b11000010 (0xC2) has the first packet in sequence bit (0b10000000) set, the last packet in sequence bit (0b01000000) set, and has a payload length of 0b00000010 (2).
 
